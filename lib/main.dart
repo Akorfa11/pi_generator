@@ -1,4 +1,5 @@
-
+import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(
@@ -35,6 +36,9 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+double num = pi;
+
+
 
   TextEditingController _controller;
 
@@ -55,86 +59,87 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Center(
         child: Column(
       children:<Widget>[
-        Container(
-          child: Text('Please input the desired decimal places       [MAX:3] ',
-          style: TextStyle(
-            fontSize: 24,
-            fontStyle:FontStyle.italic
-          ),),
-        ),
 
 
-        TextField(
-          keyboardType: TextInputType.numberWithOptions(decimal: false),
-          controller: _controller,
-          onSubmitted: ( String value) async {
-            if (value == '1') {
-              await showDialog<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Great!'),
-                    content:
-                    Text('Your value is "3.1".'),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
+        Expanded(
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Enter the decimal place ___ MAX[3]'
+            ),
+            keyboardType: TextInputType.numberWithOptions(decimal: false),
+            controller: _controller,
+            onSubmitted: ( String value) async {
+              if (value == '1') {
+                await showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Great!'),
+                      content:
+                      Text('Your value is "3.1".',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
 
-              );
-            }
-            else if ( value == '2') {
-              await showDialog<void>(
-                context: context,
-                builder:  (BuildContext) {
-                  return AlertDialog(
-                    title: const Text('Great!'),
-                    content:
-                    Text('Your value is 3.14'),
-                    actions: <Widget>[
-                      FlatButton(onPressed: () {Navigator.pop(context);
-                      },
-                        child: Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            }else if(value == '3'){
-              await showDialog<void>(
+                );
+              }
+              else if ( value == '2') {
+                await showDialog<void>(
                   context: context,
                   builder:  (BuildContext) {
                     return AlertDialog(
-                        title: const Text('Great!'),
-                        content:
-                        Text('Your value is 3.142'),
-                        actions: <Widget>[
-                          FlatButton(onPressed: () {
-                            Navigator.pop(context);
-                          },
-                            child: Text('OK'),
-                          ),
-                        ]);
-                  });
-            }   else {
-              await showDialog<void>(
-                  context: context,
-                  builder:   (BuildContext) {
-                    return AlertDialog(
-                      title: const Text('Sorry'),
+                      title: const Text('Great!'),
                       content:
-                      Text('Unavailable at the moment'),
+                      Text('Your value is 3.14'),
+                      actions: <Widget>[
+                        FlatButton(onPressed: () {Navigator.pop(context);
+                        },
+                          child: Text('OK'),
+                        ),
+                      ],
                     );
-                  }
-              );
-            }
-          })],
+                  },
+                );
+              }else if(value == '3'){
+                await showDialog<void>(
+                    context: context,
+                    builder:  (BuildContext) {
+                      return AlertDialog(
+                          title: const Text('Great!'),
+                          content:
+                          Text('Your value is 3.142'),
+                          actions: <Widget>[
+                            FlatButton(onPressed: () {
+                              Navigator.pop(context);
+                            },
+                              child: Text('OK'),
+                            ),
+                          ]);
+                    });
+              }   else {
+                await showDialog<void>(
+                    context: context,
+                    builder:   (BuildContext) {
+                      return AlertDialog(
+                        title: const Text('Sorry'),
+                        content:
+                        Text('Unavailable at the moment'),
+                      );
+                    }
+                );
+              }
+            }),
+        )],
     ),
     ));
 
